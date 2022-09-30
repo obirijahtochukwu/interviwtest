@@ -1,0 +1,24 @@
+._card-title {
+ color: rgb(245, 237, 9);
+ background-color: rgb(27, 1, 76);
+ font-size: 24px;
+ font-weight: 600;
+ border-radius: 10px 10px 0 0;
+}
+._card-desc {
+ color: white;
+ font-size: large;
+ background: linear-gradient( rgb(27, 1, 76), rgb(58, 10, 145));
+ border-radius: 0 0 10px 10px;
+}
+
+.bar {
+ background: gray;
+ height: 5px;
+ width: 40px;
+ transition: all .4s ease-in-out;
+}
+
+.bar._active-slide {
+ background: linear-gradient(rgb(27, 1, 76), rgb(58, 10, 145));
+}
