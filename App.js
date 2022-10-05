@@ -3,6 +3,7 @@ import './Index.css'
 
 export default function App() {
   const [activeSlide, setActiveSlide] = useState(0)
+  const [show, setShow] = useState(false)
 
   const data = [
     {indicator: 'bar', title: 'putin', desc: 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Tempore iusto ab fugiat suscipit aliquam dolorem assumenda voluptates dolores earum, maxime dolorum recusandae tenetur id quis dolore obcaecati explicabo neque quas.'},
@@ -35,12 +36,14 @@ export default function App() {
                 <div style={{transition: 'all .4s ease-in-out'}} className={`${activeSlide === index ?  'd-block' : 'd-none'}`}>
 
                 <div className="d-flex justify-content-around my-3">
-                  <button className="btn btn-outline-warning text-capitalize"  onClick={resetSlide}>Restart</button>
-                  <button disabled={activeSlide === 0 && "true"} className="btn btn-outline-danger text-capitalize" onClick={()=> backward(index)}>previous</button>
-                  <button disabled={activeSlide === 4 &&"true"} className="btn btn-outline-success text-capitalize" onClick={()=> forward(index)}>next</button>
+                  <button onMouseOver={()=> setShow(true)} onMouseOut={()=> setShow(false)} className="btn btn-outline-warning text-capitalize"  onClick={resetSlide}>Restart</button>
+                  <button onMouseOver={()=> setShow(true)} onMouseOut={()=> setShow(false)} disabled={activeSlide === 0 && "true"} className="btn btn-outline-danger text-capitalize" onClick={()=> backward(index)}>previous</button>
+                  <button onMouseOver={()=> setShow(true)} onMouseOut={()=> setShow(false)} disabled={activeSlide === 4 &&"true"} className="btn btn-outline-success text-capitalize" onClick={()=> forward(index)}>next</button>
                 </div>
-                <h5 className="text-center text-capitalize _card-title my-0 pt-4 pb-2">{title}</h5>
-                <p className="text-center _card-desc pt-3 pb-5 px-3">{desc}</p>
+                <div onMouseOver={()=> setShow(true)} onMouseOut={()=> setShow(false)}>
+                  <h5 className={`text-center text-capitalize _card-title my-0 pt-4 pb-2`}> <span style={{transition: '0.2s'}} className={`${show ? 'visible' : 'invisible'}`}>{title}</span> </h5>
+                  <p className={`text-center _card-desc pt-3 pb-5 px-3`}> <span style={{transition: '0.2s'}} className={`${show ? 'visible' : 'invisible'}`}>{desc}</span></p>
+                  </div>
                 </div>
               </div>
             )
@@ -54,7 +57,7 @@ export default function App() {
           {data.map((props,index)=>{
             return (
               <div key={index} className={index === activeSlide ? ' _active-slide d-noe bar mx-1' : 'bar mx-2 d-block'}>
-                {index === activeSlide && activeSlide +1}
+                {index === activeSlide && <div className={`${show ? 'visible' : 'invisible'}`}>{activeSlide + 1}</div> }
               </div>
             )
           })}
